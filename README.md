@@ -1,4 +1,4 @@
-# dirkniferV.0
+# dirkniferV.0 [Under Development]
 > A simple and effective Directory fuzzer!
 
 <div align="center">
@@ -33,6 +33,7 @@ Commands TREE:
 
 ## Features
 - [ ] This Will filter with header and resp Size!
+- [ ] Those String are Avoided ['404', 'It looks like you’re lost.', 'Not Found', 'Page Not Found' ]
 
 ## TODO
 
@@ -41,3 +42,9 @@ Commands TREE:
 ## Contributing
 
 Pull requests are welcome. Feel free to contribute to this tool and make improvements!
+
+---------------
+
+### ⚠ Legal Disclaimer ⚠
+
+This project is made for educational and ethical testing purposes only. Usage of this tool for attacking targets without prior mutual consent is illegal. Developers assume no liability and are not responsible for any misuse or damage caused by this tool.
