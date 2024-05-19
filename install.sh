@@ -1,4 +1,8 @@
-#!/bin/bash
+#!/usr/bin/bash
 
-#pip3 install --upgrade -r requirements.txt
+sudo apt install python3-pip
+pip3 install beautifulsoup4
+pip3 install requests
+
+
 #sudo cp main.py /usr/local/bin/
