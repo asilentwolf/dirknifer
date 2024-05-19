@@ -1,5 +1,5 @@
 # dirkniferV.0 [Under Development]
-> A simple and effective Directory fuzzer!
+> A simple But effective Directory fuzzer!
 
 <div align="center">
 <img src="https://img.shields.io/badge/version-1.0-blue" alt="pip package version">
