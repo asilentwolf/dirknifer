@@ -85,3 +85,13 @@ def find_file(file_name):
 
 def removenewlinesfromlist(lst):
     return [string.replace('\n', '') for string in lst]
+
+def removelinefromfile(file_path, text_to_remove):
+    # Read the file and store its lines
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+    # Remove the lines containing the specific text
+    modified_lines = [line for line in lines if text_to_remove not in line]
+    # Write the modified content back to the file
+    with open(file_path, 'w') as file:
+        file.writelines(modified_lines)

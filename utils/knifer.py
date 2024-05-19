@@ -27,9 +27,10 @@ class Colors:
 
 def Main(h, m, w):
     Words = w
-    pattern = r'\[([^\]]+)\]'
+    pattern = r'\(([^)]+)\)'
     results = []
     colorx = []
+    count = None
     def requester(u):
         headers = {
             "User-Agent": utils.UserAgent,
@@ -37,8 +38,8 @@ def Main(h, m, w):
 
         try:
             req = r.request(method=m, url=u, proxies=proxy, verify=False, allow_redirects=False, headers=headers, timeout=5)
-            found = f"{u} [{len(req.content)}]" + f"[{req.status_code}]"
-            soup = BeautifulSoup(req.content, 'html.parser')
+            found = f"{u} [{len(req.text)}]" + f"[{req.status_code}]"
+            soup = BeautifulSoup(req.text, 'html.parser')
             response = len(req.text.splitlines())
             header = len(req.headers)
             count = response + header
@@ -49,7 +50,7 @@ def Main(h, m, w):
             else:
                 title = None
             if req.status_code != 404 and all(string not in req.text for string in strings_to_check):
-                color = Colors.BOLD + Colors.GREEN + "   └── " + Colors.RESET + Colors.CYAN + f"{m}: {u} [{count}]" + Colors.RESET + Colors.YELLOW + f"[{req.status_code}][{title}]" + Colors.RESET
+                color = Colors.BOLD + Colors.GREEN + "   └── " + Colors.RESET + Colors.CYAN + f"{m}: {u} ({count})" + Colors.RESET + Colors.YELLOW + f"[{req.status_code}][{title}]" + Colors.RESET
                 results.append(re.sub(r'\033\[\d+m', '', color))
                 colorx.append(color)
             else:

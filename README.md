@@ -10,34 +10,46 @@
 
 ## Usage
 ```
-usage: main.py [-h] [-f FILE] [-n NUMBER] [-t THREADS] [-c CONCURRENCY] [-p] {use} ...
+usage: main.py [-h] [-f FILE] [-n NUMBER] [-p] [-t THREADS] [-c CONCURRENCY]
+               [-o OUT] [-m METHOD] [-func] [-api] [-ofa] [-r] [-w WORDF]
+               [-all]
 
-Happy Hunting! gOOd luck!
+Happy Hunting! GOOd luck!
 
 options:
   -h, --help            show this help message and exit
   -f FILE, --file FILE  Provide Your Urls file!
   -n NUMBER, --number NUMBER
-                        Numbers of Threads and Concurrency (default: 10)
-  -t THREADS, --threads THREADS
-                        Numbers of Threads You Want To Use! (default: 10)
-  -c CONCURRENCY, --concurrency CONCURRENCY
-                        Numbers of Concurrents You want To Use(default: 10)
+                        Numbers for uses
   -p, --proxy           Proxyifing (default: None)
-
-Commands TREE:
-  {use}                 Available sub-commands
-    use                 Users for detection!
+  -t THREADS, --threads THREADS
+                        Numbers of Threads(default: 1)
+  -c CONCURRENCY, --concurrency CONCURRENCY
+                        Numbers of Concurrents features(default: 1)
+  -o OUT, --out OUT     To Save Output
+  -m METHOD, --method METHOD
+                        Use The Method To Fuzz[POST,GET,PATCH,PUT++] default
+                        is GET
+  -func, --func         Fuzz The func Words!
+  -api, --api           To fuzz API Words!
+  -ofa, --ofa           To fuzz One for all Words
+  -r, --raft            To fuzz RaftWords
+  -w WORDF, --wordf WORDF
+                        Use Custom Words To Fuzz
+  -all, --all           To fuzz One for all Words
 
 ```
 
 ## Features
-- [ ] This Will filter with header and resp Size!
-- [ ] Those String are Avoided ['404', 'It looks like you’re lost.', 'Not Found', 'Page Not Found' ]
+- [ ] 
+- [ ] 
 
 ## TODO
 
 - [ ] WAF Delaying
+- [ ] Multi-Platforms Supporting..
+- [ ] Recusive Fuzzing.
+- [ ] ++++
 
 ## Contributing
 

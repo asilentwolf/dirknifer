@@ -150,8 +150,6 @@ def argparser():
             except Exception as e:
                 print(e)
 
-
-
     elif args.file is None:
         if args.method is not None:
             method = args.method
@@ -159,21 +157,29 @@ def argparser():
             method = "GET"
 
         if args.func == True:
-            dirkniferX(u=utils.host, type="func", method=method)
+            dirkniferX(u=utils.url, type="func", method=method)
         elif args.api == True:
-            dirkniferX(u=utils.host, type="api", method=method)
+            dirkniferX(u=utils.url, type="api", method=method)
         elif args.ofa == True:
-            dirkniferX(u=utils.host, type="ofa", method=method)
+            dirkniferX(u=utils.url, type="ofa", method=method)
         elif args.wordf is not None:
             utils.OwnWords = utils.find_file(file_name=args.wordf)
-            dirkniferX(u=utils.host, type="own", method=method)
+            dirkniferX(u=utils.url, type="own", method=method)
         elif args.raft == True:
-            dirkniferX(u=utils.host, type="raft", method=method)
-
-        
+            dirkniferX(u=utils.url, type="raft", method=method)
+        elif args.all == True:
+            dirkniferX(u=utils.url, type="func", method=method)
+            dirkniferX(u=utils.url, type="api", method=method)
+            dirkniferX(u=utils.url, type="ofa", method=method)
+            dirkniferX(u=utils.url, type="raft", method=method)
+            utils.OwnWords = utils.find_file(file_name=args.wordf)
+            dirkniferX(u=utils.url, type="own", method=method)
     else:
         pass
 
+    if utils.FileX:
+        url = utils.url
+        utils.removelinefromfile(file_path=utils.FileX, text_to_remove=url)  #remove URL After DONE
 
 if __name__ == '__main__':
     argparser()
