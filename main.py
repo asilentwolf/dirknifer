@@ -49,14 +49,14 @@ def argparser():
     parser.add_argument('-p', '--proxy', action='store_true', help='Proxyifing (default: None)')
     parser.add_argument('-t', '--threads', type=int, default=1, help='Numbers of Threads(default: 1)')
     parser.add_argument('-c', '--concurrency', type=int, default=1, help='Numbers of Concurrents features(default: 1)')
-    parser.add_argument('-o', '--out', help='To Save Output')
     parser.add_argument('-m', '--method', help="Use The Method To Fuzz[POST,GET,PATCH,PUT++] default is GET")
     parser.add_argument('-func', '--func', action='store_true', help="Fuzz The func Words!")
     parser.add_argument('-api', '--api', action='store_true', help="To fuzz API Words!")
     parser.add_argument('-ofa', '--ofa', action='store_true', help="To fuzz One for all Words")
     parser.add_argument('-r', '--raft', action='store_true', help="To fuzz RaftWords")
     parser.add_argument('-w', '--wordf', help="Use Custom Words To Fuzz")
-    parser.add_argument('-all', '--all', action='store_true', help="To fuzz One for all Words")
+    parser.add_argument('-all', '--all', action='store_true', help="To fuzz all")
+    parser.add_argument('-o', '--out', help='To Save Output')
 
     
     args = parser.parse_args()
