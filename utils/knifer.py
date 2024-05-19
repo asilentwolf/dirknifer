@@ -79,7 +79,7 @@ def Main(h, m, w):
         all_results.extend(matches)
     unieqvalues = set(all_results)
     for x in unieqvalues:
-        for y in colorx:
+        for y in results:
             if x in y:
                 found.append(y)
                 break

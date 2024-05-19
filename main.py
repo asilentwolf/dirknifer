@@ -36,7 +36,14 @@ def dirkniferX(u, type, method):
         knifer.Main(h=host, m=method, w=utils.OwnWords)
     elif type == "raft":
         knifer.Main(h=host, m=method, w=utils.raft)
+    
 
+    #remove URL After DONE
+    if utils.FileX:
+        url = u
+        utils.removelinefromfile(file_path=utils.FileX, text_to_remove=url)
+
+    
 #ArgParser...
 def argparser():
     currentdirectory = os.path.dirname(os.path.realpath(__file__))
@@ -81,6 +88,7 @@ def argparser():
     
     #args
     if args.file is not None:
+        print(Colors.BOLD + Colors.CYAN + "╞── Discovering..." + Colors.RESET)
         utils.FileX = utils.find_file(file_name=args.file)
         if args.method is not None:
             method = args.method
@@ -151,6 +159,7 @@ def argparser():
                 print(e)
 
     elif args.file is None:
+        print(Colors.BOLD + Colors.CYAN + "╞── Discovering..." + Colors.RESET)
         if args.method is not None:
             method = args.method
         else:
@@ -176,10 +185,6 @@ def argparser():
             dirkniferX(u=utils.url, type="own", method=method)
     else:
         pass
-
-    if utils.FileX:
-        url = utils.url
-        utils.removelinefromfile(file_path=utils.FileX, text_to_remove=url)  #remove URL After DONE
 
 if __name__ == '__main__':
     argparser()
