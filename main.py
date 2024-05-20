@@ -42,6 +42,8 @@ def dirkniferX(u, type, method):
     if utils.FileX:
         url = u
         utils.removelinefromfile(file_path=utils.FileX, text_to_remove=url)
+    else:
+        pass
 
     
 #ArgParser...
@@ -109,6 +111,7 @@ def argparser():
                 with concurrent.futures.ProcessPoolExecutor(max_workers=utils.Concurrency) as executor:
                     executor.map(partial(dirkniferX, type="func", method=method), (x.strip() for x in finalurl))
                     executor.shutdown(wait=True)
+                    
             except KeyboardInterrupt:
                 print("Ctrl+C pressed. Shutting down gracefully...")
                 executor.shutdown(wait=False)
@@ -181,8 +184,6 @@ def argparser():
             dirkniferX(u=utils.url, type="api", method=method)
             dirkniferX(u=utils.url, type="ofa", method=method)
             dirkniferX(u=utils.url, type="raft", method=method)
-            utils.OwnWords = utils.find_file(file_name=args.wordf)
-            dirkniferX(u=utils.url, type="own", method=method)
     else:
         pass
 
