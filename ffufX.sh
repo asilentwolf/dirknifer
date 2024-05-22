@@ -27,15 +27,14 @@ function main(){
     x=$1
     rX=$(mktemp --suffix=".txt")
     # Fetch data using ffuf and append to temporary file
-    ffuf -w db/Allmiro.txt -u "$x/FUZZ" -mc 200 -fs 0 -sf -se -recursion | awk '{print $1}' | sed 's/[^[:print:]]//g' | sed 's/\[2K//g' > "$rX"
+    ffuf -w db/API.txt -u "$x/FUZZ" -mc 200 -fs 0 -sf -se -recursion | awk '{print $1}' | sed 's/[^[:print:]]//g' | sed 's/\[2K//g' > "$rX"
     for i in $(cat "$rX"); do
-        echo "$x/$i" 
-    done
+        echo "$x/$i"
+    done | sort -u | python3 utils/Uniqe.py
 }
 
 for d in $(cat $fX); do
-    main $d &
-Jobs
+    main $d
 done
 wait
 exit
