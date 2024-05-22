@@ -77,7 +77,7 @@ def Main(h, m, w):
     for line in results:
         matches = re.findall(pattern, line)
         all_results.extend(matches)
-    unieqvalues = set(all_results)
+    unieqvalues = set(sorted(all_results))
     for x in unieqvalues:
         for y in results:
             if x in y:

@@ -16,7 +16,7 @@ else
     :
 fi
 
-NJobs=20 ; export NJobs
+NJobs=1 ; export NJobs
 Jobs(){
 	if [[  $(jobs | wc -l ) -ge $NJobs ]] ; then
 		wait -n
@@ -34,5 +34,8 @@ function main(){
 }
 
 for d in $(cat $fX); do
-    main $d
+    main $d &
+Jobs
 done
+wait
+exit
