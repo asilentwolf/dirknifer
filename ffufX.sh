@@ -34,7 +34,8 @@ function main(){
 }
 
 for d in $(cat $fX); do
-    main $d
+    main $d &
+Jobs
 done
 wait
 exit
