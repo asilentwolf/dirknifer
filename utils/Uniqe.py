@@ -49,8 +49,8 @@ def Main(url):
             color = Colors.BOLD + Colors.GREEN + "   └── " + Colors.RESET + Colors.CYAN + f"{u} ({count})" + Colors.RESET + Colors.YELLOW + f"[{req.status_code}][{title}]" + Colors.RESET
             results.append(re.sub(r'\033\[\d+m', '', color))
             colorx.append(color)
-        except Exception as e:
-            print(e)
+        except:
+            pass
     
     urlX = url.split("\n")
     try:
