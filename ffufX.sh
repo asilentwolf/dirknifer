@@ -25,12 +25,16 @@ Jobs(){
 
 function main(){
     x=$1
+    bsedX="sed -e 's/^http:\/\///g' -e 's/^https:\/\///g' -e 's/^www\.//g' | sed 's/[.].*$//'"
+    Brand=$(echo $x | eval $bsedX)
     rX=$(mktemp --suffix=".txt")
-    # Fetch data using ffuf and append to temporary file
+    #Fetch data using ffuf and append to temporary file!
     ffuf -w db/Allmiro.txt -u "$x/FUZZ" -mc 200 -fs 0 -sf -se | awk '{print $1}' | sed 's/[^[:print:]]//g' | sed 's/\[2K//g' > "$rX"
+    
     for i in $(cat "$rX"); do
         echo "$x/$i"
     done | sort -u | python3 utils/Uniqe.py
+    sed -i "/$Brand/d" $D
 }
 
 for d in $(cat $fX); do
