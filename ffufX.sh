@@ -16,7 +16,7 @@ else
     :
 fi
 
-NJobs=1 ; export NJobs
+NJobs=3 ; export NJobs
 Jobs(){
 	if [[  $(jobs | wc -l ) -ge $NJobs ]] ; then
 		wait -n
