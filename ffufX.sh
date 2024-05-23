@@ -28,10 +28,13 @@ function main(){
     bsedX="sed -e 's/^http:\/\///g' -e 's/^https:\/\///g' -e 's/^www\.//g' | sed 's/[.].*$//'"
     Brand=$(echo $x | eval $bsedX)
     rX=$(mktemp --suffix=".txt")
+
     #Fetch data using ffuf and append to temporary file!
-    ffuf -w db/Allmiro.txt -u "$x/FUZZ" -mc 200 -fs 0 -sf -se | awk '{print $1}' | sed 's/[^[:print:]]//g' | sed 's/\[2K//g' > "$rX"
-    
-    for i in $(cat "$rX"); do
+    ffuf -w db/Allmiro.txt -u "$x/FUZZ" -fc 404 -fs 0 -sa -s | awk '{print $1}' | sed 's/[^[:print:]]//g' | sed 's/\[2K//g' >> "$rX"
+    ffuf -w db/raft.txt -u "$x/FUZZ" -fc 404 -fs 0 -sa -s | awk '{print $1}' | sed 's/[^[:print:]]//g' | sed 's/\[2K//g' >> "$rX"
+    ffuf -w db/raft.txt -u "$x/_FUZZ" -fc 404 -fs 0 -sa -s | awk '{print $1}' | sed 's/[^[:print:]]//g' | sed 's/\[2K//g' >> "$rX"
+
+    for i in $(cat "$rX" | sort -u); do
         echo "$x/$i"
     done | sort -u | python3 utils/Uniqe.py
     sed -i "/$Brand/d" $D
