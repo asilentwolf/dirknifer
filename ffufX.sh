@@ -16,7 +16,7 @@ else
     :
 fi
 
-NJobs=3 ; export NJobs
+NJobs=2 ; export NJobs
 Jobs(){
 	if [[  $(jobs | wc -l ) -ge $NJobs ]] ; then
 		wait -n
@@ -30,9 +30,9 @@ function main(){
     rX=$(mktemp --suffix=".txt")
 
     #Fetch data using ffuf and append to temporary file!
-    ffuf -w db/Allmiro.txt -u "$x/FUZZ" -fc 404 -fs 0 -sa -s | awk '{print $1}' | sed 's/[^[:print:]]//g' | sed 's/\[2K//g' >> "$rX"
-    ffuf -w db/raft.txt -u "$x/FUZZ" -fc 404 -fs 0 -sa -s | awk '{print $1}' | sed 's/[^[:print:]]//g' | sed 's/\[2K//g' >> "$rX"
-    ffuf -w db/raft.txt -u "$x/_FUZZ" -fc 404 -fs 0 -sa -s | awk '{print $1}' | sed 's/[^[:print:]]//g' | sed 's/\[2K//g' >> "$rX"
+    ffuf -w db/Allmiro.txt -u "$x/FUZZ" -fc 404 -fs 0 -sa -s  >> "$rX"
+    ffuf -w db/raft.txt -u "$x/FUZZ" -fc 404 -fs 0 -sa -s >> "$rX"
+    ffuf -w db/raft.txt -u "$x/_FUZZ" -fc 404 -fs 0 -sa -s >> "$rX"
 
     for i in $(cat "$rX" | sort -u); do
         echo "$x/$i"
