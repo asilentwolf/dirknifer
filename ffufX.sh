@@ -30,9 +30,9 @@ function main(){
     rX=$(mktemp --suffix=".txt")
 
     #Fetch data using ffuf and append to temporary file!
-    ffuf -w db/Allmiro.txt -u "$x/FUZZ" -fc 404 -fs 0 -sa -s  >> "$rX"
-    ffuf -w db/raft.txt -u "$x/FUZZ" -fc 404 -fs 0 -sa -s >> "$rX"
-    ffuf -w db/raft.txt -u "$x/_FUZZ" -fc 404 -fs 0 -sa -s >> "$rX"
+    ffuf -w db/Allmiro.txt -u "$x/FUZZ" -mc 200 -fs 0 -sa -s  >> "$rX"
+    ffuf -w db/raft.txt -u "$x/FUZZ" -mc 200 -fs 0 -sa -s >> "$rX"
+    ffuf -w db/raft.txt -u "$x/_FUZZ" -mc 200 -fs 0 -sa -s >> "$rX"
 
     for i in $(cat "$rX" | sort -u); do
         echo "$x/$i"
