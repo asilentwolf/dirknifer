@@ -39,8 +39,8 @@ def Main(url):
             req = r.get(url=u, verify=False, allow_redirects=False, headers=headers, timeout=5)
             found = f"{u} [{len(req.text)}]" + f"[{req.status_code}]"
             soup = BeautifulSoup(req.text, 'html.parser')
-            response = len(req.text.splitlines())
-            header = len(req.headers)
+            response = len(utils.remove_urls(req.text))
+            header = len(utils.remove_urls(str(req.headers)))
             count = response + header
 
             titletag = soup.find('title')

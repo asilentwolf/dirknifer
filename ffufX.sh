@@ -33,6 +33,7 @@ function main(){
     ffuf -w db/Allmiro.txt -u "$x/FUZZ" -mc 200 -fs 0 -sa -s  >> "$rX"
     ffuf -w db/raft.txt -u "$x/FUZZ" -mc 200 -fs 0 -sa -s >> "$rX"
     #ffuf -w db/raft.txt -u "$x/_FUZZ" -mc 200 -fs 0 -sa -s >> "$rX"
+    #ffuf -w db/raft.txt -u "$x/~FUZZ" -mc 200 -fs 0 -sa -s >> "$rX"
 
     for i in $(cat "$rX" | sort -u); do
         echo "$x/$i"
