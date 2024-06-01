@@ -9,6 +9,8 @@ import requests as r
 import concurrent.futures
 import re
 from bs4 import BeautifulSoup
+import traceback
+
 
 proxy = utils.proxy
 strings_to_check = ['It looks like you’re lost.', 'Not Found', 'Page Not Found']
@@ -27,18 +29,14 @@ class Colors:
 def Main(url):
     pattern = r'\(([^)]+)\)'
     results = []
-    colorx = []
-    count = None
-
     def requester(u):
         headers = {
             "User-Agent": utils.UserAgent,
         }
-
         try:
             req = r.get(url=u, verify=False, allow_redirects=False, headers=headers, timeout=5)
-            found = f"{u} [{len(req.text)}]" + f"[{req.status_code}]"
             soup = BeautifulSoup(req.text, 'html.parser')
+
             response = len(utils.remove_urls(req.text))
             header = len(utils.remove_urls(str(req.headers)))
             count = response + header
@@ -48,16 +46,15 @@ def Main(url):
                 title = titletag.get_text()
             else:
                 title = None
-            if req.status_code != 404 and all(string not in req.text for string in strings_to_check):
-                color = Colors.BOLD + Colors.GREEN + "   └── " + Colors.RESET + Colors.CYAN + f"{u} ({count})" + Colors.RESET + Colors.YELLOW + f"[{req.status_code}][{title}]" + Colors.RESET
-                results.append(re.sub(r'\033\[\d+m', '', color))
-                colorx.append(color)
-        except:
+
+            color = f"{u} ({count}) [{req.status_code}][{title}]"
+            results.append(color)
+        except Exception as e:
             pass
     
     urlX = url.split("\n")
     try:
-        with concurrent.futures.ThreadPoolExecutor(max_workers=utils.Worker) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=2) as executor:
             executor.map(requester, urlX)
     except KeyboardInterrupt:
         print("Ctrl+C pressed. Shutting down gracefully...")
@@ -70,7 +67,8 @@ def Main(url):
     for line in results:
         matches = re.findall(pattern, line)
         all_results.extend(matches)
-    unieqvalues = set(sorted(all_results))
+    unieqvalues = set(sorted(set(all_results)))
+
     for x in unieqvalues:
         for y in results:
             if x in y:

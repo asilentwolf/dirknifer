@@ -98,3 +98,8 @@ def removelinefromfile(file_path, text_to_remove):
             file.writelines(modified_lines)
     except:
         pass
+
+def remove_urls(text):
+    url_pattern = re.compile(r'https?://\S+')
+    clean_text = re.sub(url_pattern, '', text)
+    return clean_text
