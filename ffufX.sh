@@ -25,7 +25,7 @@ Jobs(){
 
 function main(){
     x=$1
-    bsedX="sed -e 's/^http:\/\///g' -e 's/^https:\/\///g' -e 's/^www\.//g' | sed 's/[.].*$//'"
+    bsedX="sed -e 's/^http:\/\///g' -e 's/^https:\/\///g' -e 's/^www\.//g'"
     Brand=$(echo $x | eval $bsedX)
     rX=$(mktemp --suffix=".txt")
 
